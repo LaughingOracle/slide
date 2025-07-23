@@ -1,0 +1,1 @@
+bikin tombol buat view spesific poster (plus tombol back)

@@ -26,9 +26,15 @@ class SlideController extends Controller
             return response()->json([], 400);
         }
 
-        $results = Posters::where($column, $query)->get();
+        $results = Posters::where($column, $query)->where("tv", $request->input('tv'))->get();
 
         return response()->json($results);
+    }
+
+    public function view(String $id){
+        $poster = Posters::find($id);
+
+        return view('view', compact('poster'));  
     }
 
 }

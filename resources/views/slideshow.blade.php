@@ -106,14 +106,12 @@
 
 <div class="modal-overlay" id="searchModal">
     <div class="modal-content">
-        <select id="searchColumn">
-            <option value="name">Name</option>
-            <option value="title">Title</option>
-            <option value="legacyId">Id</option>
-        </select>
-        <input type="text" id="searchQuery" placeholder="Enter search term">
-        <button onclick="performSearch()">Search</button>
-
+            <select id="searchColumn" onchange="performSearch()">
+                <option value="name">Name</option>
+                <option value="title">Title</option>
+                <option value="legacyId">Id</option>
+            </select>
+            <input type="text" id="searchQuery" placeholder="Enter search term" oninput="debouncedSearch()">
         <div class="search-results">
         <table id="searchResultsTable" style="width: 100%; border-collapse: collapse;">
                 <thead>
@@ -163,12 +161,14 @@
     async function performSearch() {
     const column = document.getElementById('searchColumn').value;
     const query = document.getElementById('searchQuery').value;
+    const pathParts = window.location.pathname.split('/');
+    const tv = pathParts[pathParts.length - 1]; // Gets "123" from /slide/123
     const resultsBody = document.getElementById('searchResultsBody');
 
     resultsBody.innerHTML = '<tr><td colspan="3" style="padding: 10px;">Searching...</td></tr>';
 
     try {
-        const response = await fetch(`/search?column=${column}&query=${encodeURIComponent(query)}`);
+        const response = await fetch(`/search?column=${column}&tv=${tv}&query=${encodeURIComponent(query)}`);
         const data = await response.json();
         resultsBody.innerHTML = '';
 
@@ -184,12 +184,25 @@
                     <td style="padding: 10px; border-bottom: 1px solid #eee;">
                         ${(item.title ?? '-').length > 50 ? (item.title.substring(0, 50) + '...') : (item.title ?? '-')}
                     </td>
-                    <td style="padding: 10px; border-bottom: 1px solid #eee;">${item.id ?? '-'}</td>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;">
+                        <form action="/view/${item.id}" method="GET">
+                            <button type="submit">View</button>
+                        </form>
+                    </td>
                 </tr>
             `;
         });
     } catch (error) {
         resultsBody.innerHTML = '<tr><td colspan="3" style="padding: 10px;">Error during search.</td></tr>';
     }
+}
+
+let searchTimeout = null;
+
+function debouncedSearch() {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => {
+        performSearch();
+    }, 300); // Delay in milliseconds (300ms is common for debounce)
 }
 </script>

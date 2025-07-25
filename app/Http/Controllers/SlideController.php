@@ -26,7 +26,7 @@ class SlideController extends Controller
             return response()->json([], 400);
         }
 
-        $results = Posters::where($column, $query)->where("tv", $request->input('tv'))->get();
+        $results = Posters::where($column, 'like' , '%' . $query . "%" )->where("tv", $request->input('tv'))->get();
 
         return response()->json($results);
     }

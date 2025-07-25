@@ -20,14 +20,21 @@
         box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     }
 
+    .centr{
+        display: flex; 
+        justify-content: center; 
+        align-items: center;
+        height: 100vh;
+    }
+
     .fit-img {
-        width: 100vw;
         height: 100vh;
         object-fit: cover; /* or "contain", depending on what you want */
     }
 </style>
-
-<img src="{{ asset('storage/slides/' . $poster->id . '.png') }}" class="fit-img">
+<div class='centr'>
+    <img src="{{ asset('storage/slides/' . $poster->id . '.png') }}" class="fit-img">
+</div>
 <form method="GET" action=" {{  route('slide.tv', ['tv' => $poster->tv])  }} ">
     <button class='back-button'><-</button>
 </form>

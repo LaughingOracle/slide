@@ -7,11 +7,14 @@
 
     .slideshow {
         width: 100%;
-        max-width: 600px;
         height: auto;
         overflow: hidden;
     }
     .slide {
+                display: flex; 
+        justify-content: center; 
+        align-items: center;
+        height: 100vh;
         position: absolute;
         top: 0;
         left: 100%;
@@ -23,7 +26,7 @@
         z-index: 1;
     }
 
-        .modal-button {
+    .modal-button {
         position: fixed;
         bottom: 20px;
         right: 20px;
@@ -87,7 +90,9 @@
     }
 
     .fit-img {
-        width: 100vw;
+        display: flex; 
+        justify-content: center; 
+        align-items: center;
         height: 100vh;
         object-fit: cover; /* or "contain", depending on what you want */
     }

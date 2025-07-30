@@ -20,8 +20,9 @@
             background-color: #3490dc;
             color: white;
             border: none;
-            padding: 14px 18px;
-            border-radius: 50%;
+            height: 10%;
+            width: 20%;
+            border-radius: 15px;
             font-size: 24px;
             cursor: pointer;
             z-index: 100;
@@ -56,7 +57,7 @@
         <img src="{{ asset('storage/slides/' . $poster->id . '.png') }}" class="fit-img">
     </div>
     <form id="tv-form" method="GET">
-        <button class='back-button'><-</button>
+        <button class='back-button'><- Balik</button>
     </form>
 
     <script>

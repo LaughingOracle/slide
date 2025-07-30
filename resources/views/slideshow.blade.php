@@ -144,7 +144,7 @@
                         <tr>
                             <th style="text-align:left; padding: 10px; border-bottom: 1px solid #ccc;">Peserta</th>
                             <th style="text-align:left; padding: 10px; border-bottom: 1px solid #ccc;">Judul</th>
-                            <th style="text-align:left; padding: 10px; border-bottom: 1px solid #ccc;">Coding</th>
+                            <th style="text-align:left; padding: 10px; border-bottom: 1px solid #ccc;">Action</th>
                         </tr>
                     </thead>
                     <tbody id="searchResultsBody">

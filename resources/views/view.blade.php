@@ -21,9 +21,9 @@
             color: white;
             border: none;
             height: 10%;
-            width: 20%;
+            width: 50%;
             border-radius: 15px;
-            font-size: 24px;
+            font-size: 1.3em;
             cursor: pointer;
             z-index: 100;
             box-shadow: 0 4px 8px rgba(0,0,0,0.3);
@@ -59,7 +59,6 @@
     <form id="tv-form" method="GET">
         <button class='back-button'><- Balik</button>
     </form>
-
     <script>
         let searchBtnTimeout = null;
 

@@ -55,7 +55,7 @@
     <div class='centr'>
         <img src="{{ asset('storage/slides/' . $poster->id . '.png') }}" class="fit-img">
     </div>
-    <form method="GET" action=" {{  route('slide.tv', ['tv' => $poster->tv])  }} ">
+    <form id="tv-form" method="GET">
         <button class='back-button'><-</button>
     </form>
 
@@ -81,6 +81,16 @@
 
         // Trigger on click — change the selector if you want a different trigger
         document.querySelector('.centr').addEventListener('click', showSearchButton);
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("tv-form");
+            const tvValue = sessionStorage.getItem("tv");
+
+            if (tvValue) {
+                // Replace this with your actual route prefix
+                form.action = `/slide/${encodeURIComponent(tvValue)}`;
+            }
+        });
     </script>
 </body>
 </html>

@@ -121,11 +121,11 @@
 </head>
 <body>
     <div class="slideshow">
-            @foreach($posters as $poster)
-                <div class="slide">
-                    <img src="{{ asset('storage/slides/' . $poster->id . '.png') }}" class="fit-img">
-                </div>
-            @endforeach
+        @foreach($posters as $poster)
+            <div class="slide">
+                <img src="{{ asset('storage/slides/' . $poster->id . '.png') }}" class="fit-img">
+            </div>
+        @endforeach
     </div>
 
     <button class="modal-button" onclick="toggleModal()">🔍</button>
@@ -133,18 +133,18 @@
     <div class="modal-overlay" id="searchModal">
         <div class="modal-content">
                 <select id="searchColumn" onchange="performSearch()">
-                    <option value="name">Name</option>
-                    <option value="title">Title</option>
-                    <option value="legacyId">Id</option>
+                    <option value="name">Peserta</option>
+                    <option value="title">Judul</option>
+                    <option value="legacyId">Coding</option>
                 </select>
                 <input type="text" id="searchQuery" placeholder="Enter search term" oninput="debouncedSearch()">
             <div class="search-results">
             <table id="searchResultsTable" style="width: 100%; border-collapse: collapse;">
                     <thead>
                         <tr>
-                            <th style="text-align:left; padding: 10px; border-bottom: 1px solid #ccc;">Name</th>
-                            <th style="text-align:left; padding: 10px; border-bottom: 1px solid #ccc;">Title</th>
-                            <th style="text-align:left; padding: 10px; border-bottom: 1px solid #ccc;">Action</th>
+                            <th style="text-align:left; padding: 10px; border-bottom: 1px solid #ccc;">Peserta</th>
+                            <th style="text-align:left; padding: 10px; border-bottom: 1px solid #ccc;">Judul</th>
+                            <th style="text-align:left; padding: 10px; border-bottom: 1px solid #ccc;">Coding</th>
                         </tr>
                     </thead>
                     <tbody id="searchResultsBody">
@@ -152,10 +152,8 @@
                     </tbody>
                 </table>
             </div>
-
         </div>
     </div>
-
     <script>
         let slides = document.querySelectorAll('.slide');
         let index = 0;
@@ -189,12 +187,13 @@
         const query = document.getElementById('searchQuery').value;
         const pathParts = window.location.pathname.split('/');
         const tv = pathParts[pathParts.length - 1]; // Gets "123" from /slide/123
+        sessionStorage.setItem("tv", tv);
         const resultsBody = document.getElementById('searchResultsBody');
 
         resultsBody.innerHTML = '<tr><td colspan="3" style="padding: 10px;">Searching...</td></tr>';
 
         try {
-            const response = await fetch(`/search?column=${column}&tv=${tv}&query=${encodeURIComponent(query)}`);
+            const response = await fetch(`/search?column=${column}&query=${encodeURIComponent(query)}`);
             const data = await response.json();
             resultsBody.innerHTML = '';
 
@@ -216,7 +215,7 @@
                             </form>
                         </td>
                     </tr>`;
-                    });
+                });
         } catch (error) {
                 resultsBody.innerHTML = '<tr><td colspan="3" style="padding: 10px;">Error during search.</td></tr>';
             }

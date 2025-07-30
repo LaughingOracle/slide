@@ -1,9 +1,20 @@
 <form method="POST" action="/slide" enctype="multipart/form-data">
     @csrf
-    <input type="file" name="image" required>
-    <input type="text" name="name" placeholder="name">
-    <input type="text" name="title" placeholder="title">
+    <br>
+    <input type="text" name="name" placeholder="Peserta">
+    <br>
+    <br>
+    <input type="text" name="title" placeholder="Judul">
+    <br>
+    <br>
     <input type="text" name="tv" placeholder="tv">
-    <input type="text" name="legacyId" placeholder="legacyId">
+    <br>
+    <br>
+    <input type="text" name="legacyId" placeholder="Coding">
+    <br>
+    <br>
+    <input type="file" name="image" required>
+    <br>
+    <br>
     <button type="submit">Upload</button>
 </form>

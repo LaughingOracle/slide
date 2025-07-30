@@ -46,7 +46,9 @@
             color: white;
             border: none;
             padding: 14px 18px;
-            border-radius: 50%;
+            height: 10%;
+            width: 20%;
+            border-radius: 15px;
             font-size: 24px;
             cursor: pointer;
             z-index: 100;
@@ -128,7 +130,7 @@
         @endforeach
     </div>
 
-    <button class="modal-button" onclick="toggleModal()">🔍</button>
+    <button class="modal-button" onclick="toggleModal()">Cari poster</button>
 
     <div class="modal-overlay" id="searchModal">
         <div class="modal-content">

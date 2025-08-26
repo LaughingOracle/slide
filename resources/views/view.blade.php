@@ -36,15 +36,15 @@
                 transition: opacity 0.5s ease, visibility 0s linear 0.5s; /* delay visibility hide */
                 position: fixed;
                 bottom: 20px;
-                left: 20px;
+                right: 20px;
                 background-color: #3490dc;
                 color: white;
                 border: none;
                 padding: 14px 18px;
-                height: 10%;
-                width: 50%;
+                height: 100px;
+                width: 300px;
                 border-radius: 15px;
-                font-size: 6vw;
+                font-size: 30px;
                 cursor: pointer;
                 z-index: 100;
                 box-shadow: 0 4px 8px rgba(0,0,0,0.3);
@@ -59,15 +59,15 @@
                 transition: opacity 0.5s ease, visibility 0s linear 0.5s; /* delay visibility hide */
                 position: fixed;
                 bottom: 20px;
-                left: 20px;
+                right: 20px;
                 background-color: #3490dc;
                 color: white;
                 border: none;
                 padding: 14px 18px;
-                height: 15%;
-                width: 30%;
+                height: 100px;
+                width: 300px;
                 border-radius: 15px;
-                font-size: 2vw;
+                font-size: 30px;
                 cursor: pointer;
                 z-index: 100;
                 box-shadow: 0 4px 8px rgba(0,0,0,0.3);

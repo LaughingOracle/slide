@@ -47,10 +47,10 @@
                 color: white;
                 border: none;
                 padding: 14px 18px;
-                height: 10%;
-                width: 50%;
+                height: 100px;
+                width: 300px;
                 border-radius: 15px;
-                font-size: 6vw;
+                font-size: 30px;
                 cursor: pointer;
                 z-index: 100;
                 box-shadow: 0 4px 8px rgba(0,0,0,0.3);
@@ -70,10 +70,10 @@
                 color: white;
                 border: none;
                 padding: 14px 18px;
-                height: 15%;
-                width: 30%;
+                height: 100px;
+                width: 300px;
                 border-radius: 15px;
-                font-size: 2vw;
+                font-size: 30px;
                 cursor: pointer;
                 z-index: 100;
                 box-shadow: 0 4px 8px rgba(0,0,0,0.3);
@@ -210,40 +210,40 @@
         });
 
         async function performSearch() {
-        const column = document.getElementById('searchColumn').value;
-        const query = document.getElementById('searchQuery').value;
-        const pathParts = window.location.pathname.split('/');
-        const tv = pathParts[pathParts.length - 1]; // Gets "123" from /slide/123
-        sessionStorage.setItem("tv", tv);
-        const resultsBody = document.getElementById('searchResultsBody');
+            const column = document.getElementById('searchColumn').value;
+            const query = document.getElementById('searchQuery').value;
+            const pathParts = window.location.pathname.split('/');
+            const tv = pathParts[pathParts.length - 1]; // Gets "123" from /slide/123
+            sessionStorage.setItem("tv", tv);
+            const resultsBody = document.getElementById('searchResultsBody');
 
-        resultsBody.innerHTML = '<tr><td colspan="3" style="padding: 10px;">Searching...</td></tr>';
+            resultsBody.innerHTML = '<tr><td colspan="3" style="padding: 10px;">Searching...</td></tr>';
 
-        try {
-            const response = await fetch(`/search?column=${column}&query=${encodeURIComponent(query)}`);
-            const data = await response.json();
-            resultsBody.innerHTML = '';
+            try {
+                const response = await fetch(`/search?column=${column}&query=${encodeURIComponent(query)}`);
+                const data = await response.json();
+                resultsBody.innerHTML = '';
 
-            if (!Array.isArray(data) || data.length === 0) {
-                resultsBody.innerHTML = '<tr><td colspan="3" style="padding: 10px;">No results found.</td></tr>';
-                return;
-            }
+                if (!Array.isArray(data) || data.length === 0) {
+                    resultsBody.innerHTML = '<tr><td colspan="3" style="padding: 10px;">No results found.</td></tr>';
+                    return;
+                }
 
-            data.forEach(item => {
-                resultsBody.innerHTML += `
-                    <tr>
-                        <td style="padding: 10px; border-bottom: 1px solid #eee;">${item.name ?? '-'}</td>
-                        <td style="padding: 10px; border-bottom: 1px solid #eee;">
-                            ${(item.title ?? '-').length > 50 ? (item.title.substring(0, 50) + '...') : (item.title ?? '-')}
-                        </td>
-                        <td style="padding: 10px; border-bottom: 1px solid #eee;">
-                            <form action="/view/${item.id}" method="GET">
-                                <button type="submit">View</button>
-                            </form>
-                        </td>
-                    </tr>`;
-                });
-        } catch (error) {
+                data.forEach(item => {
+                    resultsBody.innerHTML += `
+                        <tr>
+                            <td style="padding: 10px; border-bottom: 1px solid #eee;">${item.name ?? '-'}</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #eee;">
+                                ${(item.title ?? '-').length > 50 ? (item.title.substring(0, 50) + '...') : (item.title ?? '-')}
+                            </td>
+                            <td style="padding: 10px; border-bottom: 1px solid #eee;">
+                                <form action="/view/${item.id}" method="GET">
+                                    <button type="submit">View</button>
+                                </form>
+                            </td>
+                        </tr>`;
+                    });
+            } catch (error) {
                 resultsBody.innerHTML = '<tr><td colspan="3" style="padding: 10px;">Error during search.</td></tr>';
             }
         }

@@ -150,7 +150,7 @@
     <div class="slideshow">
         @foreach($posters as $poster)
             <div class="slide">
-                <img src="{{ asset('storage/slides/' . $poster->id . '.png') }}" class="fit-img">
+                <img src="{{ asset('storage/slides/' . $poster->tv . '/' . $poster->id . '.png') }}" class="fit-img">
             </div>
         @endforeach
     </div>

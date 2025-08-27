@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Posters;
 use Intervention\Image\Laravel\Facades\Image;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -19,40 +20,57 @@ class AdminController extends Controller
             'tv' => 'string|max:255'
         ]);
 
-        // simple sql insert
-        $poster = Posters::create([
-            'name' => $request->name,
-            'title' => $request->title,
-            'legacyId' => $request->legacyId,
-            'tv' => $request->tv
-        ]);
+        // Start a transaction
+        return DB::transaction(function () use ($request) {
 
-        $image = $request->file('image');
-        $filename = "$poster->id.png";
+            // Insert into DB first (to get the ID)
+            $poster = Posters::create([
+                'name' => $request->name,
+                'title' => $request->title,
+                'legacyId' => $request->legacyId,
+                'tv' => $request->tv
+            ]);
 
-        // Define your target size (example: 512x512)
-        $targetWidth = 1080;
-        $targetHeight = 1920;
+            $image = $request->file('image');
+            $tv = $request->tv;
+            $filename = "{$poster->id}.png";
 
-        // Resize (upscale or downscale)
-        $resized = Image::read($image)
-            ->resize($targetWidth, $targetHeight, function ($constraint) {
-                $constraint->aspectRatio();   // keep aspect ratio
-                $constraint->upsize();        // prevent smaller images from stretching
-            });
+            $targetWidth = 1080;
+            $targetHeight = 1920;
 
-        // Save processed image
-        $resized->save(storage_path('app/public/slides/' . $filename), 100);
+            $resized = Image::read($image)
+                ->resize($targetWidth, $targetHeight, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
 
-        // save to path
-        //$path = $request->file('image')->storeAs('slides', "$poster->id.png", 'public');
+            $savePath = storage_path("app/public/slides/{$tv}/{$filename}");
 
-        return back()->with('success', 'Poster uploaded successfully');
+            // Try saving the file
+            $resized->save($savePath, 100);
+
+            // If we reach here, both DB insert + image save succeeded
+            return back()->with('success', 'Poster uploaded successfully');
+        });
+    }
+
+    public function delete($id)
+    {
+        $poster = Posters::findOrFail($id);
+
+        Storage::disk('public')->delete('slides/' . $poster->tv . '/' . $poster->id . '.png');
+        $poster->delete();
+
+        return redirect()->route('slideDashboard')->with('success', 'Post deleted.');
     }
 
     //simple dashboard redirect
     public function index(Request $request)
     {
-        return view('/dashboard');
+        $posters = Posters::orderBy('tv')->orderBy('id')->get();
+
+        $grouped = $posters->groupBy('tv');
+
+        return view('/dashboard', compact('grouped'));
     }
 }

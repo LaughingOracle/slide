@@ -13,13 +13,14 @@ Route::get('/slide/{tv}', [SlideController::class, 'index'])->name('slide.tv');
 
 Route::get('/view/{id}', [SlideController::class, 'view'])->name('view.id');
 
-Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+Route::get('/slideDashboard', [AdminController::class, 'index'])->name('slideDashboard');
 Route::post('/slide', [AdminController::class, 'store'])->name('slide.store');
-
+Route::delete('/posterDelete/{id}', [AdminController::class, 'delete'])->name('posterDelete');
 
 Route::get('/search', [SlideController::class, 'search']);
 
 
+// WIP
 Route::get('/slideshow/{filename}', function ($filename) {
     $path = storage_path('app/public/slides/' . $filename);
 

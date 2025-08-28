@@ -16,6 +16,8 @@ Route::get('/view/{id}', [SlideController::class, 'view'])->name('view.id');
 Route::get('/slideDashboard', [AdminController::class, 'index'])->name('slideDashboard');
 Route::post('/slide', [AdminController::class, 'store'])->name('slide.store');
 Route::delete('/posterDelete/{id}', [AdminController::class, 'delete'])->name('posterDelete');
+Route::get('/updateIndex/{id}', [AdminController::class, 'updateIndex'])->name('updateIndex');
+Route::post('/updateSlide/{id}', [AdminController::class, 'updateSlide'])->name('updateSlide');
 
 Route::get('/search', [SlideController::class, 'search']);
 

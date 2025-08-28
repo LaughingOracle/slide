@@ -73,4 +73,58 @@ class AdminController extends Controller
 
         return view('/dashboard', compact('grouped'));
     }
+
+    public function updateIndex(Request $request)
+    {
+        $poster = Posters::find($request->id);
+
+        return view('/update', compact('poster'));
+    }
+
+    public function updateSlide(Request $request){
+        $validated = $request->validate([
+            'id' => 'string',
+            'image' => 'image|max:20480',
+            'name' => 'string|max:255',
+            'title' => 'string|max:255',
+            'legacyId' => 'string|max:255',
+            'tv' => 'string|max:255'
+        ]);
+
+
+        $poster = Posters::findOrFail($request->id);
+
+        // Start a transaction
+        return DB::transaction(function () use ($request, $validated, $poster) {
+
+            $poster->update([
+                'name' => $validated['name'],
+                'title' => $validated['title'],
+                'legacyId' => $validated['legacyId'],
+                'tv' => $validated['tv']
+            ]);
+
+        // Only process the image if it was uploaded
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $tv = $request->tv;
+            $filename = "{$poster->id}.png";
+
+            $targetWidth = 1080;
+            $targetHeight = 1920;
+
+            $resized = Image::read($image)
+                ->resize($targetWidth, $targetHeight, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+
+            $savePath = storage_path("app/public/slides/{$tv}/{$filename}");
+            $resized->save($savePath, 100);
+        }
+
+            // If we reach here, both DB insert + image save succeeded
+            return redirect()->route('slideDashboard');
+        });
+    }
 }

@@ -10,18 +10,23 @@
     <form method="POST" action="/slide" enctype="multipart/form-data" id="slideForm">
         @csrf
         <br>
-        <input type="text" name="name" placeholder="Peserta">
+        <label for="name">peserta</label><br>
+        <input type="text" name="name" >
         <br>
         <br>
-        <input type="text" name="title" placeholder="Judul">
+        <label for="title">judul</label><br>
+        <input type="text" name="title">
         <br>
         <br>
-        <input type="text" name="tv" placeholder="tv">
+        <label for="tv">tv</label><br>
+        <input type="text" name="tv" >
         <br>
         <br>
-        <input type="text" name="legacyId" placeholder="Coding">
+        <label for="legacyId">koding</label><br>
+        <input type="text" name="legacyId" >
         <br>
         <br>
+        <label for="image">gambar poster</label>
         <input type="file" name="image" required>
         <br>
         <br>
@@ -29,20 +34,28 @@
     </form>
 
     <br>
+    <hr>
     <br>
 
     @foreach($grouped as $tv => $entries)
         <h2>TV: {{ $tv }}</h2>
         <table>
+            <tr> <td>nama</td> <td>judul</td> <td>koding</td>  </tr>
             @foreach($entries as $entry)
                 <tr>
-                    <td> {{ $entry->name }} - </td>
-                    <td> {{ $entry->title }} - </td> 
+                    <td> {{ $entry->name }} </td>
+                    <td> {{ $entry->title }} </td> 
+                    <td> {{ $entry->legacyId }} </td>
                     <td>
                         <form action="{{ route('posterDelete', $entry->id) }}" method="POST"> 
                             @csrf 
                             @method('DELETE')
                             <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{{ route('updateIndex', $entry->id) }}" method="GET"> 
+                            <button type="submit">Update</button>
                         </form>
                     </td>
                 </tr>

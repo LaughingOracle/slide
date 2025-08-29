@@ -42,12 +42,16 @@ class AdminController extends Controller
                 ->resize($targetWidth, $targetHeight, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
-                });
+            });
 
-            $savePath = storage_path("app/public/slides/{$tv}/{$filename}");
+            $dirPath = storage_path("app/public/slides/{$tv}");
+            if (!file_exists($dirPath)) {
+                mkdir($dirPath, 0755, true);
+            }
 
-            // Try saving the file
+            $savePath = "{$dirPath}/{$filename}";
             $resized->save($savePath, 100);
+
 
             // If we reach here, both DB insert + image save succeeded
             return back()->with('success', 'Poster uploaded successfully');

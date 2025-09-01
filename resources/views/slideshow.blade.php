@@ -199,6 +199,7 @@
         showSlide(index);
 
 
+        // Modal
         function toggleModal() {
             const modal = document.getElementById('searchModal');
             modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
@@ -209,6 +210,7 @@
             if (e.target === modal) modal.style.display = 'none';
         });
 
+        // Search AJAX
         async function performSearch() {
             const column = document.getElementById('searchColumn').value;
             const query = document.getElementById('searchQuery').value;
@@ -229,6 +231,7 @@
                     return;
                 }
 
+                // Search Query
                 data.forEach(item => {
                     resultsBody.innerHTML += `
                         <tr>

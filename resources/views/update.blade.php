@@ -36,7 +36,7 @@
 
     <br>
     <br>
-    <img src="{{ asset('storage/slides/' . $poster->tv . '/' . $poster->id . '.png') }}" style="width:240px; height:426;">
+    <img src="{{ asset('storage/slides/' . $poster->id . '.png') }}" style="width:240px; height:426;">
 
     <script>
         document.querySelectorAll("#slideForm input").forEach((input, index, inputs) => {

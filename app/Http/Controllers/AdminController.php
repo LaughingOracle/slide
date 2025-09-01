@@ -63,7 +63,7 @@ class AdminController extends Controller
     {
         $poster = Posters::findOrFail($id);
 
-        Storage::disk('public')->delete('slides/' . $poster->tv . '/' . $poster->id . '.png');
+        Storage::disk('public')->delete('slides/' . $poster->id . '.png');
         $poster->delete();
 
         return redirect()->route('slideDashboard')->with('success', 'Post deleted.');
@@ -96,7 +96,6 @@ class AdminController extends Controller
             'tv' => 'string|max:255'
         ]);
 
-
         $poster = Posters::findOrFail($request->id);
 
         // Start a transaction
@@ -122,7 +121,7 @@ class AdminController extends Controller
                 ->resize($targetWidth, $targetHeight, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
-                });
+            });
 
             $savePath = storage_path("app/public/slides/{$filename}");
             $resized->save($savePath, 100);

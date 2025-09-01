@@ -150,7 +150,7 @@
     <div class="slideshow">
         @foreach($posters as $poster)
             <div class="slide">
-                <img src="{{ asset('storage/slides/' . $poster->tv . '/' . $poster->id . '.png') }}" class="fit-img">
+                <img src="{{ asset('storage/slides/' . $poster->id . '.png') }}" class="fit-img">
             </div>
         @endforeach
     </div>
@@ -194,7 +194,7 @@
         setInterval(() => {
             index = (index + 1) % slides.length;
             showSlide(index);
-        }, 1000);
+        }, 10000);
 
         showSlide(index);
 

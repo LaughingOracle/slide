@@ -31,24 +31,25 @@ class AdminController extends Controller
                 'tv' => $request->tv
             ]);
 
+
             $image = $request->file('image');
             $tv = $request->tv;
             $filename = "{$poster->id}.png";
 
+            // resized image to a uniform 1080x1920 vertical TV
             $targetWidth = 1080;
             $targetHeight = 1920;
-
             $resized = Image::read($image)
                 ->resize($targetWidth, $targetHeight, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
             });
 
-            $dirPath = storage_path("app/public/slides/{$tv}");
+            // check if path exist, if not, create one
+            $dirPath = storage_path("app/public/slides/");
             if (!file_exists($dirPath)) {
                 mkdir($dirPath, 0755, true);
             }
-
             $savePath = "{$dirPath}/{$filename}";
             $resized->save($savePath, 100);
 
@@ -101,12 +102,12 @@ class AdminController extends Controller
         // Start a transaction
         return DB::transaction(function () use ($request, $validated, $poster) {
 
-            $poster->update([
-                'name' => $validated['name'],
-                'title' => $validated['title'],
-                'legacyId' => $validated['legacyId'],
-                'tv' => $validated['tv']
-            ]);
+        $poster->update([
+            'name' => $validated['name'],
+            'title' => $validated['title'],
+            'legacyId' => $validated['legacyId'],
+            'tv' => $validated['tv']
+        ]);
 
         // Only process the image if it was uploaded
         if ($request->hasFile('image')) {
@@ -114,21 +115,22 @@ class AdminController extends Controller
             $tv = $request->tv;
             $filename = "{$poster->id}.png";
 
+            // image input
             $targetWidth = 1080;
             $targetHeight = 1920;
-
             $resized = Image::read($image)
                 ->resize($targetWidth, $targetHeight, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 });
 
-            $savePath = storage_path("app/public/slides/{$tv}/{$filename}");
+            $savePath = storage_path("app/public/slides/{$filename}");
             $resized->save($savePath, 100);
         }
 
-            // If we reach here, both DB insert + image save succeeded
-            return redirect()->route('slideDashboard');
+        // If we reach here, both DB insert + image save succeeded
+        return redirect()->route('slideDashboard');
+
         });
     }
 }

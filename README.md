@@ -1,13 +1,12 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+pic 1<br>
+https://drive.google.com/file/d/1u4IS2kt37Nl6lMvdo0iV1I1IGzjW9kSX/view?usp=sharing
+pic2 <br>
+https://drive.google.com/file/d/1cHNeTwdme9cfzc6QNcp17An2jQgdlKdt/view?usp=sharing
 
-[https://drive.google.com/drive/folders/1TZXRvbvMBA5eiljtDY8FkT22Y_FQtH3E?usp=sharing](https://drive.google.com/file/d/1Q3jahr_joyQUnCrDt5mSZLjQEbVURopR/view?usp=sharing)
+https://drive.google.com/file/d/109IAjsGToIGaG2acdWxodLCqDCzoiteI/view?usp=sharing
 
 <br>
-
-[https://drive.google.com/drive/folders/1TZXRvbvMBA5eiljtDY8FkT22Y_FQtH3E?usp=sharing](https://drive.google.com/drive/folders/1xn5iEVxQhWSe_7U41k5iq-cI2FGiObeg?usp=sharing)
-
-<br>
-https://drive.google.com/drive/folders/1VUW7HJ03MzmU2-m4U4EMU9BGcoJp_RS5?usp=sharing
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>

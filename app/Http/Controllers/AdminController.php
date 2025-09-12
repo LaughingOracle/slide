@@ -34,7 +34,7 @@ class AdminController extends Controller
 
             $image = $request->file('image');
             $tv = $request->tv;
-            $filename = "{$poster->id}.png";
+            $filename = "{$poster->legacyId}.png";
 
             // resized image to a uniform 1080x1920 vertical TV
             $targetWidth = 1080;
@@ -123,7 +123,7 @@ class AdminController extends Controller
                     $constraint->upsize();
             });
 
-            $savePath = storage_path("app/public/slides/{$filename}");
+            $savePath = storage_path("app/public/slides/{$poster->legacyId}");
             $resized->save($savePath, 100);
         }
 

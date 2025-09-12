@@ -150,7 +150,7 @@
     <div class="slideshow">
         @foreach($posters as $poster)
             <div class="slide">
-                <img src="{{ asset('storage/slides/' . $poster->id . '.png') }}" class="fit-img">
+                <img src="{{ asset('storage/slides/' . $poster->legacyId . '.png') }}" class="fit-img">
             </div>
         @endforeach
     </div>
@@ -160,8 +160,8 @@
     <div class="modal-overlay" id="searchModal">
         <div class="modal-content">
                 <select id="searchColumn" onchange="performSearch()">
-                    <option value="name">Peserta</option>
                     <option value="title">Judul</option>
+                    <option value="peserta">Peserta</option>
                     <option value="legacyId">Coding</option>
                 </select>
                 <input type="text" id="searchQuery" placeholder="Enter search term" oninput="debouncedSearch()">
@@ -194,7 +194,7 @@
         setInterval(() => {
             index = (index + 1) % slides.length;
             showSlide(index);
-        }, 10000);
+        }, 1000);
 
         showSlide(index);
 

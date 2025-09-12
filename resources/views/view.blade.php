@@ -102,7 +102,7 @@
 </head>
 <body>
     <div class='centr'>
-        <img src="{{ asset('storage/slides/' . $poster->id . '.png') }}" class="fit-img">
+        <img src="{{ asset('storage/slides/' . $poster->legacyId . '.png') }}" class="fit-img">
     </div>
     <form id="tv-form" method="GET">
         <button class='back-button'><- Balik</button>

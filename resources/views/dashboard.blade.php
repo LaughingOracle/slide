@@ -19,7 +19,7 @@
         <br>
         <br>
         <label for="tv">tv</label><br>
-        <input type="text" name="tv" >
+        <input type="text" name="tv" value='1'>
         <br>
         <br>
         <label for="legacyId">koding</label><br>

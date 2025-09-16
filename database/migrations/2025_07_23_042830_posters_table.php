@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('title');
-            $table->string('tv');
+            $table->string('tv')->default('1');
             $table->string('legacyId');
             $table->timestamps();
         });

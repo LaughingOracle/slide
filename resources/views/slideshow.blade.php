@@ -194,7 +194,7 @@
         setInterval(() => {
             index = (index + 1) % slides.length;
             showSlide(index);
-        }, 1000);
+        }, 10000);
 
         showSlide(index);
 

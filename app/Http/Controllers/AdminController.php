@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Posters;
 use Intervention\Image\Laravel\Facades\Image;
+use Intervention\Image\Encoders\JpegEncoder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -34,7 +35,7 @@ class AdminController extends Controller
 
             $image = $request->file('image');
             $tv = $request->tv;
-            $filename = "{$poster->legacyId}.png";
+            $filename = "{$poster->legacyId}.jpg";
 
             // resized image to a uniform 1080x1920 vertical TV
             $targetWidth = 1080;
@@ -51,8 +52,7 @@ class AdminController extends Controller
                 mkdir($dirPath, 0755, true);
             }
             $savePath = "{$dirPath}/{$filename}";
-            $resized->save($savePath, 100);
-
+            $resized->encode(new JpegEncoder(quality: 85))->save($savePath);
 
             // If we reach here, both DB insert + image save succeeded
             return back()->with('success', 'Poster uploaded successfully');
@@ -63,7 +63,7 @@ class AdminController extends Controller
     {
         $poster = Posters::findOrFail($id);
 
-        Storage::disk('public')->delete('slides/' . $poster->id . '.png');
+        Storage::disk('public')->delete('slides/' . $poster->id . '.jpg');
         $poster->delete();
 
         return redirect()->route('slideDashboard')->with('success', 'Post deleted.');
@@ -112,7 +112,7 @@ class AdminController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $tv = $request->tv;
-            $filename = "{$poster->id}.png";
+            $filename = "{$poster->id}.jpg";
 
             // image input
             $targetWidth = 1080;

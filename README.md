@@ -15,12 +15,17 @@ Note: the image displayed is pre-configured to be resized for a 1080x1920 vertic
 
 It is worth noting that the system does not save the original resolution of any images, every image is formatted to a uniform 1080x1920 vertical for simplified frontend implementation
 
-## installation
+<hr>
+
+<strong> Local Installation </strong> <br> <br>
 `git clone https://github.com/LaughingOracle/slide.git` <br>
 `compser install` <br>
 `composer require intervention/image-laravel`<br>
 `cp .env.envexample .env`(linux) or `Copy-Item .env.envexample .env`(windows)<br>
 `php artisan key:generate`
-<br>
+<br> <br>
 
+<hr>
+<strong> Server Deployment </strong> <br> <br>
+https://docs.google.com/document/d/1I1fMFDh2KJyOy8InLCyE8impPxXJ0gAKs3pLbuN0L9s/edit?tab=t.ot3of0pz0qjy
 </p>

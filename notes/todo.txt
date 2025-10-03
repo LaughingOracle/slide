@@ -4,7 +4,7 @@ bikin search jadi 'auto increment' x
 cursor highlight x
 image processing optimisation x
 note: average 1.5mb -> 300kb
-      batch ~600mb/500 png -> sequential 300kb/1 jpg
+      batch ~600mb/500 png -> sequential 300kb/1 jpg (~150mb total)
 
 before: all image per tv were loaded for every time /slide/{tv} is called, an instant spike of ~600mb
 now: image is called when it's about to be showed, 300kb/10 sec (<- 10 sec is the preconfigured slide delay)

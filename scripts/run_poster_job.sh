@@ -1,17 +1,24 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-# Set HOME if not defined
-: "${HOME:=/home/bije}"
+# -------------------------
+# Resolve HOME safely (PHP exec compatible)
+# -------------------------
+USER_HOME="$(getent passwd "$(whoami)" | cut -d: -f6)"
+export HOME="$USER_HOME"
 
-# Add user-local bin to PATH
+# -------------------------
+# Ensure user-local bin is available
+# -------------------------
 export PATH="$HOME/.local/bin:$PATH"
 
-# Now check gdown
-GDOWN_CMD=$(command -v gdown || echo "$HOME/.local/bin/gdown")
-
-if [[ ! -x "$GDOWN_CMD" ]]; then
-    echo "ERROR: gdown not installed. Install with 'pip install --user gdown'"
+# -------------------------
+# Verify gdown exists
+# -------------------------
+if ! command -v gdown >/dev/null 2>&1; then
+    echo "ERROR: gdown not found"
+    echo "Make sure you ran: pip install --user gdown"
+    echo "PATH=$PATH"
     exit 1
 fi
 

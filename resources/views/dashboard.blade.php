@@ -34,6 +34,10 @@
     </form>
 
     <br>
+
+    <a href="{{ route('poster.job.form') }}"> Link upload secara masal </a>
+    <br>
+    <br>
     <hr>
     <br>
 

@@ -8,3 +8,8 @@ note: average 1.5mb -> 300kb
 
 before: all image per tv were loaded for every time /slide/{tv} is called, an instant spike of ~600mb
 now: image is called when it's about to be showed, 300kb/10 sec (<- 10 sec is the preconfigured slide delay)
+
+
+https://drive.google.com/file/d/1zKICZs3DZEgVSf77jbzfnPNXM4_7fXc9/view?usp=drive_link
+https://drive.google.com/file/d/118whLYiAA9pUY4_Th53mQoDuo-8iVoEo/view?usp=drive_link
+https://drive.google.com/file/d/118whLYiAA9pUY4_Th53mQoDuo-8iVoEo/view?usp=drive_link

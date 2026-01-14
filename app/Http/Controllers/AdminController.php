@@ -132,4 +132,16 @@ class AdminController extends Controller
 
         });
     }
+
+ 
+    public function advanceDashboard(Request $request)
+    {
+        return view('/advanceDashboard');
+    }
+
+    public function posterUpload(Request $request)
+    {
+        return view('/massUpload');
+    }
+
 }

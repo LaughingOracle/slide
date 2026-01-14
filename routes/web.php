@@ -18,8 +18,19 @@ Route::post('/slide', [AdminController::class, 'store'])->name('slide.store');
 Route::delete('/posterDelete/{id}', [AdminController::class, 'delete'])->name('posterDelete');
 Route::get('/updateIndex/{id}', [AdminController::class, 'updateIndex'])->name('updateIndex');
 Route::post('/updateSlide/{id}', [AdminController::class, 'updateSlide'])->name('updateSlide');
-
 Route::get('/search', [SlideController::class, 'search']);
+
+
+use App\Http\Controllers\PosterJobController;
+
+Route::get('/poster-job', [PosterJobController::class, 'form'])
+    ->name('poster.job.form');
+
+Route::post('/poster-job/run', [PosterJobController::class, 'run'])
+    ->name('poster.job.run');
+
+use App\Http\Controllers\AdminPosterImportController;
+Route::post('/admin/sql-import', [AdminPosterImportController::class, 'import']);
 
 
 // WIP

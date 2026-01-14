@@ -53,11 +53,12 @@ mkdir -p "$DOWNLOAD_DIR" "$TMP_DIR" "$POSTERS_DIR"
 # -------------------------
 # Logging
 # -------------------------
-exec > >(tee -a "$LOG_FILE") 2>&1
+exec >> "$LOG_FILE" 2>&1
 echo "==== JOB START $(date) ===="
 echo "PROJECT_ROOT=$PROJECT_ROOT"
 echo "BASE_DIR=$BASE_DIR"
 echo "POSTERS_DIR=$POSTERS_DIR"
+
 
 # -------------------------
 # Input URL

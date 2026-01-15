@@ -29,16 +29,10 @@ foreach ($files as $file) {
     $filename = basename($file); // just the file, not path
 
     // Extract the number before the first dash
-    if (preg_match('/^(\d+)-/', $filename, $matches)) {
-        $num = intval($matches[1]); // remove leading zeros
+    if (preg_match('/^(\d+)[.-]/', $filename, $matches)) {
+    $num = intval($matches[1]); // remove leading zeros
     } else {
         $num = $counter; // fallback if no dash found
-    }
-
-    // Load image
-    $img = @imagecreatefromstring(file_get_contents($file));
-    if (!$img) {
-        continue;
     }
 
     $width  = imagesx($img);
